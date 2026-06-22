@@ -492,3 +492,27 @@ input:focus, textarea:focus{
   object-fit:cover;               /* photo neat-ah crop/fit */
   display:block;
 }
+/* Scroll Reveal */
+.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(2px);
+  transition: opacity .65s ease, transform .65s ease, filter .65s ease;
+  will-change: opacity, transform, filter;
+}
+
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce){
+  .reveal{
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
