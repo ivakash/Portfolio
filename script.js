@@ -44,3 +44,32 @@ function openMail(e){
   return false;
 }
 window.openMail = openMail;
+// Scroll reveal (fade + slide)
+function initScrollReveal(){
+  // Pick elements to animate (you can add more selectors if needed)
+  const targets = document.querySelectorAll(
+    ".section-head, .title, .subtitle, .pill, .mini-card, .glass.card, .profile, .project"
+  );
+
+  // Add base class + small stagger delay
+  targets.forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.transitionDelay = `${Math.min(i * 60, 360)}ms`;
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        io.unobserve(entry.target); // reveal once
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -10% 0px"
+  });
+
+  targets.forEach(el => io.observe(el));
+}
+
+window.addEventListener("DOMContentLoaded", initScrollReveal);
